@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Clasificación de Números</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background-color: #000; /* Fondo negro */
+      color: #fff; /* Color de texto blanco */
+      text-align: center;
+      padding: 20px;
+    }
+
+    h1 {
+      color: #007bff; /* Color del título */
+    }
+
+    main {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #333; /* Color del fondo del contenido */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Sombra suave en blanco */
+    }
+
+    p {
+      margin-top: 20px;
+    }
+
+    form {
+      margin-top: 20px;
+    }
+
+    input[type="file"] {
+      display: none; /* Oculta el input file por defecto */
+    }
+
+    .custom-file-upload {
+      border: 1px solid #ccc;
+      display: inline-block;
+      padding: 6px 12px;
+      cursor: pointer;
+      background-color: #28a745; /* Color del botón de carga */
+      color: #fff; /* Color del texto del botón de carga */
+      border-radius: 5px;
+    }
+
+    .custom-file-upload:hover {
+      background-color: #218838; /* Cambia el color al pasar el mouse */
+    }
+
+    .btn-clasificar {
+      width: 100%; /* Botón 100% ancho */
+      margin-top: 20px;
+      background-color: #007bff; /* Color del botón de clasificación */
+    }
+
+    .btn-clasificar:hover {
+      background-color: #0056b3; /* Cambia el color al pasar el mouse */
+    }
+
+    #imagen-previa {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+      display: none; /* Oculta la imagen previa inicialmente */
+    }
+  </style>
+</head>
+<body>
+  <h1>Clasificación de Números</h1>
+  <main>
+    <p>Cargue una imagen de un número para clasificar:</p>
+    <form method="POST" action="/clasificar" enctype="multipart/form-data">
+      <label for="imagen" class="custom-file-upload">
+        <input type="file" id="imagen" name="imagen" accept="image/*" onchange="mostrarImagen(this)" />
+        Seleccionar Archivo
+      </label>
+      <img id="imagen-previa" alt="Vista previa de la imagen" />
+      <button type="submit" class="btn btn-clasificar">Clasificar</button>
+    </form>
+  </main>
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    function mostrarImagen(input) {
+      var vistaPrevia = document.getElementById('imagen-previa');
+      var archivo = input.files[0];
+      var lector = new FileReader();
+
+      lector.onload = function (e) {
+        vistaPrevia.src = e.target.result;
+        vistaPrevia.style.display = 'block'; // Muestra la imagen previa
+      };
+
+      lector.readAsDataURL(archivo);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultado de Clasificación</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <style>
+    body {
+      background-color: #000; /* Fondo negro */
+      color: #fff; /* Color de texto blanco */
+      text-align: center;
+      padding: 20px;
+      font-family: 'Arial', sans-serif; /* Cambia el tipo de letra */
+    }
+
+    h1 {
+      color: #007bff; /* Color del título */
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      background-color: #333; /* Color del fondo del contenido */
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(255, 255, 255, 0.1); /* Sombra suave en blanco */
+    }
+
+    p {
+      margin-top: 20px;
+      font-size: 1.5em; /* Tamaño de letra más grande */
+      font-weight: bold; /* Texto en negrita */
+    }
+
+    .btn {
+      width: 100%; /* Botón 100% ancho */
+      margin-top: 20px;
+      background-color: #007bff; /* Color del botón de carga */
+    }
+
+    #imagen-previa {
+      max-width: 100%;
+      height: auto;
+      margin-top: 20px;
+      display: none; /* Oculta la imagen previa inicialmente */
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 class="mt-5">Resultado de Clasificación</h1>
+    <p class="mt-4">El número clasificado es: <span style="color: #28a745;">{{ resultado }}</span></p>
+    <img id="imagen-previa" alt="Vista previa de la imagen" />
+    <a href="/" class="btn btn-primary mt-4">Cargar otra imagen</a>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    // Llamado a la función mostrarImagen() con un ejemplo de la imagen cargada
+    mostrarImagen({ files: [{ name: "imagen-previa" }] });
+
+    function mostrarImagen(input) {
+      var vistaPrevia = document.getElementById('imagen-previa');
+      var archivo = input.files[0];
+      var lector = new FileReader();
+
+      lector.onload = function (e) {
+        vistaPrevia.src = e.target.result;
+        vistaPrevia.style.display = 'block'; // Muestra la imagen previa
+      };
+
+      lector.readAsDataURL(archivo);
+    }
+  </script>
+</body>
+</html>
